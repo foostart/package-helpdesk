@@ -94,7 +94,7 @@
 
             <!--SEARCH-->
             <div class="col-md-4">
-                @include('package-course::admin.course-lang-backup')
+                @include('package-helpdesk::admin.helpdesk-lang-backup')
             </div>
             <!--/SEARCH-->
 

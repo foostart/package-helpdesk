@@ -1,4 +1,4 @@
-<?php namespace Foostart\Courses;
+<?php namespace Foostart\Helpdesk;
 
 use Illuminate\Support\ServiceProvider;
 use LaravelAcl\Authentication\Classes\Menu\SentryMenuFactory;
@@ -6,7 +6,7 @@ use URL,
     Route;
 use Illuminate\Http\Request;
 
-class CoursesServiceProvider extends ServiceProvider {
+class HelpdeskServiceProvider extends ServiceProvider {
 
     /**
      * Bootstrap the application services.
@@ -19,7 +19,7 @@ class CoursesServiceProvider extends ServiceProvider {
 //        $this->generateContextKey();
 
         // load view
-        $this->loadViewsFrom(__DIR__ . '/Views', 'package-course');
+        $this->loadViewsFrom(__DIR__ . '/Views', 'package-helpdesk');
 
         // include view composers
         require __DIR__ . "/composers.php";
@@ -50,23 +50,23 @@ class CoursesServiceProvider extends ServiceProvider {
      * @return void
      */
     public function register() {
-        include __DIR__ . '/Routes/course.php';
+        include __DIR__ . '/Routes/helpdesk.php';
     }
 
     /**
      * Public config to system
-     * @source: vendor/foostart/package-course/config
+     * @source: vendor/foostart/package-helpdesk/config
      * @destination: config/
      */
     protected function publishConfig() {
         $this->publishes([
-            __DIR__ . '/config/package-course.php' => config_path('package-course.php'),
+            __DIR__ . '/config/package-helpdesk.php' => config_path('package-helpdesk.php'),
                 ], 'config');
     }
 
     /**
      * Public language to system
-     * @source: vendor/foostart/package-course/lang
+     * @source: vendor/foostart/package-helpdesk/lang
      * @destination: resources/lang
      */
     protected function publishLang() {
@@ -77,19 +77,19 @@ class CoursesServiceProvider extends ServiceProvider {
 
     /**
      * Public view to system
-     * @source: vendor/foostart/package-course/Views
-     * @destination: resources/views/vendor/package-course
+     * @source: vendor/foostart/package-helpdesk/Views
+     * @destination: resources/views/vendor/package-helpdesk
      */
     protected function publishViews() {
 
         $this->publishes([
-            __DIR__ . '/Views' => base_path('resources/views/vendor/package-course'),
+            __DIR__ . '/Views' => base_path('resources/views/vendor/package-helpdesk'),
         ]);
     }
 
     protected function publishAssets() {
         $this->publishes([
-            __DIR__ . '/public' => public_path('packages/foostart/package-course'),
+            __DIR__ . '/public' => public_path('packages/foostart/package-helpdesk'),
         ]);
     }
 
@@ -103,7 +103,7 @@ class CoursesServiceProvider extends ServiceProvider {
 
     /**
      * Publish seeders
-     * @source: foostart/package-course/database/seeders
+     * @source: foostart/package-helpdesk/database/seeders
      * @destination: database/seeders
      */
     protected function publishSeeders()

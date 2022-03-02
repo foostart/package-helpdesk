@@ -1,8 +1,8 @@
-<?php namespace Foostart\Course\Models;
+<?php namespace Foostart\Helpdesk\Models;
 
 use Foostart\Category\Library\Models\FooModel;
 
-class Course extends FooModel {
+class Helpdesk extends FooModel {
 
     /**
      * @table categories
@@ -24,61 +24,61 @@ class Course extends FooModel {
     public function setConfigs() {
 
         //table name
-        $this->table = 'course';
+        $this->table = 'helpdesk';
 
         //list of field in table
         $this->fillable = array_merge($this->fillable, [
             'category_id',
-            'course_name',
-            'course_slug',
-            'course_start_date',
-            'course_end_date',
-            'course_image',
-            'course_description',
+            'helpdesk_name',
+            'helpdesk_slug',
+            'helpdesk_start_date',
+            'helpdesk_end_date',
+            'helpdesk_image',
+            'helpdesk_description',
         ]);
 
         //list of fields for inserting
         $this->fields = array_merge($this->fields, [
-            'course_name' => [
-                'name' => 'course_name',
+            'helpdesk_name' => [
+                'name' => 'helpdesk_name',
                 'type' => 'Text',
             ],
-            'course_slug' => [
-                'name' => 'course_slug',
+            'helpdesk_slug' => [
+                'name' => 'helpdesk_slug',
                 'type' => 'Text',
             ],
             'category_id' => [
                 'name' => 'category_id',
                 'type' => 'Int',
             ],
-             'course_start_date' => [
-                'name' => 'course_start_date',
+             'helpdesk_start_date' => [
+                'name' => 'helpdesk_start_date',
                 'type' => 'Text',
             ],
-            'course_end_date' => [
-                'name' => 'course_end_date',
+            'helpdesk_end_date' => [
+                'name' => 'helpdesk_end_date',
                 'type' => 'Text',
             ],
-            'course_description' => [
-                'name' => 'course_description',
+            'helpdesk_description' => [
+                'name' => 'helpdesk_description',
                 'type' => 'Text',
             ],
         ]);
 
         //check valid fields for inserting
         $this->valid_insert_fields = array_merge($this->valid_insert_fields, [
-            'course_name',
-            'course_slug',
+            'helpdesk_name',
+            'helpdesk_slug',
             'category_id',
-            'course_start_date',
-            'course_end_date',
-            'course_description',
+            'helpdesk_start_date',
+            'helpdesk_end_date',
+            'helpdesk_description',
         ]);
 
         //check valid fields for ordering
         $this->valid_ordering_fields = [
-            'course_id',
-            'course_name',
+            'helpdesk_id',
+            'helpdesk_name',
             'updated_at',
             $this->field_status,
         ];
@@ -89,7 +89,7 @@ class Course extends FooModel {
         ];
 
         //primary key
-        $this->primaryKey = 'course_id';
+        $this->primaryKey = 'helpdesk_id';
 
     }
 
@@ -119,7 +119,7 @@ class Course extends FooModel {
     }
 
     /**
-     * Get a course by {id}
+     * Get a helpdesk by {id}
      * @param ARRAY $params list of parameters
      * @return OBJECT crawler
      */
@@ -171,14 +171,14 @@ class Course extends FooModel {
                 {
                     switch($column)
                     {
-                        case 'course_name':
+                        case 'helpdesk_name':
                             if (!empty($value)) {
-                                $elo = $elo->where($this->table . '.course_name', '=', $value);
+                                $elo = $elo->where($this->table . '.helpdesk_name', '=', $value);
                             }
                             break;
-                        case 'course_website':
+                        case 'helpdesk_website':
                             if (!empty($value)) {
-                                $elo = $elo->where($this->table . '.course_website', '=', $value);
+                                $elo = $elo->where($this->table . '.helpdesk_website', '=', $value);
                             }
                             break;
                         case 'status':
@@ -190,10 +190,10 @@ class Course extends FooModel {
                         case 'keyword':
                             if (!empty($value)) {
                                 $elo = $elo->where(function($elo) use ($value) {
-                                    $elo->where($this->table . '.course_name', 'LIKE', "%{$value}%")
-                                    ->orWhere($this->table . '.course_website', 'LIKE', "%{$value}%")
-                                    ->orWhere($this->table . '.course_tax_code', 'LIKE', "%{$value}%")
-                                    ->orWhere($this->table . '.course_description','LIKE', "%{$value}%");
+                                    $elo->where($this->table . '.helpdesk_name', 'LIKE', "%{$value}%")
+                                    ->orWhere($this->table . '.helpdesk_website', 'LIKE', "%{$value}%")
+                                    ->orWhere($this->table . '.helpdesk_tax_code', 'LIKE', "%{$value}%")
+                                    ->orWhere($this->table . '.helpdesk_description','LIKE', "%{$value}%");
                                 });
                             }
                             break;
@@ -215,7 +215,7 @@ class Course extends FooModel {
     public function createSelect($elo) {
 
         $elo = $elo->select($this->table . '.*',
-                            $this->table . '.course_id as id'
+                            $this->table . '.helpdesk_id as id'
                 );
 
         return $elo;
@@ -260,7 +260,7 @@ class Course extends FooModel {
 
             $item->save();
               //add new attribute
-            $item->id = $item->course_id;
+            $item->id = $item->helpdesk_id;
 
 
             return $item;
@@ -362,9 +362,9 @@ class Course extends FooModel {
      */
      public function pluckSelect($params = array()) {
 
-         $elo = self::orderBy('course_name', 'ASC');
+         $elo = self::orderBy('helpdesk_name', 'ASC');
 
-         $items = $elo->pluck('course_name', $this->primaryKey);
+         $items = $elo->pluck('helpdesk_name', $this->primaryKey);
 
         return $items;
     }

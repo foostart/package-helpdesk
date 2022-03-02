@@ -2,20 +2,20 @@
 $withs = [
     'counter' => '7%',
     'id' => '8%',
-    'course_name' => '35%',
+    'helpdesk_name' => '35%',
     'status' => '10%',
     'updated_at' => '25%',
     'operations' => '15%',
 ];
 ?>
 
-@if(!empty($course) && (!$course->isEmpty()) )
+@if(!empty($helpdesk) && (!$helpdesk->isEmpty()) )
     <div style="min-height: 50px;">
         <div>
-            @if($course->total() == 1)
+            @if($helpdesk->total() == 1)
                 {!! trans($plang_admin.'.descriptions.counter', ['number' => 1]) !!}
             @else
-                {!! trans($plang_admin.'.descriptions.counters', ['number' => $course->total()]) !!}
+                {!! trans($plang_admin.'.descriptions.counters', ['number' => $helpdesk->total()]) !!}
             @endif
         </div>
 
@@ -62,9 +62,9 @@ $withs = [
                 </th>
 
                 <!--NAME-->
-                <?php $name = 'course_name' ?>
+                <?php $name = 'helpdesk_name' ?>
                 <th class="hidden-xs" style='width:{{ $withs[$name] }}'>
-                    {!! trans($plang_admin.'.columns.course_name') !!}
+                    {!! trans($plang_admin.'.columns.helpdesk_name') !!}
                     <a href='{!! $sorting["url"][$name] !!}' class='tb-id' data-order='asc'>
                         @if($sorting['items'][$name] == 'asc')
                             <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>
@@ -116,8 +116,8 @@ $withs = [
         </thead>
 
         <tbody>
-            <?php $counter = $course->perPage() * ($course->currentPage() - 1) + 1;  ?>
-            @foreach($course as $item)
+            <?php $counter = $helpdesk->perPage() * ($helpdesk->currentPage() - 1) + 1;  ?>
+            @foreach($helpdesk as $item)
                 <tr>
                     <!--COUNTER-->
                     <td>
@@ -130,17 +130,17 @@ $withs = [
 
                     <!--ID-->
                     <td>
-                        <a href="{!! URL::route('course.edit', [   'id' => $item->course_id,
+                        <a href="{!! URL::route('helpdesk.edit', [   'id' => $item->helpdesk_id,
                                                                         '_token' => csrf_token()
                                                                      ])
                                 !!}">
-                            {!! $item->course_id !!}
+                            {!! $item->helpdesk_id !!}
                         </a>
                     </td>
 
                     <!--NAME-->
                     <td>
-                        {!! $item->course_name !!}
+                        {!! $item->helpdesk_name !!}
                     </td>
 
                     <!--STATUS-->
@@ -158,7 +158,7 @@ $withs = [
                     <!--OPERATOR-->
                     <td>
                         <!--edit-->
-                        <a href="{!! URL::route('course.edit', [   'id' => $item->id,
+                        <a href="{!! URL::route('helpdesk.edit', [   'id' => $item->id,
                                                                     '_token' => csrf_token()
                                                                 ])
                                 !!}">
@@ -166,7 +166,7 @@ $withs = [
                         </a>
 
                         <!--copy-->
-                        <a href="{!! URL::route('course.copy',[    'cid' => $item->id,
+                        <a href="{!! URL::route('helpdesk.copy',[    'cid' => $item->id,
                                                                     '_token' => csrf_token(),
                                                                 ])
                                  !!}"
@@ -175,7 +175,7 @@ $withs = [
                         </a>
 
                         <!--delete-->
-                        <a href="{!! URL::route('course.delete',[  'id' => $item->id,
+                        <a href="{!! URL::route('helpdesk.delete',[  'id' => $item->id,
                                                                     '_token' => csrf_token(),
                                                                   ])
                                  !!}"
@@ -193,7 +193,7 @@ $withs = [
     </table>
     </div>
     <div class="paginator">
-        {!! $course->appends($request->except(['page']) )->render($pagination_view)  !!}
+        {!! $helpdesk->appends($request->except(['page']) )->render($pagination_view)  !!}
     </div>
 @else
     <!--SEARCH RESULT MESSAGE-->

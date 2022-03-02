@@ -1,11 +1,11 @@
-<?php namespace Foostart\Course\Controllers\Admin;
+<?php namespace Foostart\Helpdesk\Controllers\Admin;
 
 /*
 |-----------------------------------------------------------------------
 | CrawlerAdminController
 |-----------------------------------------------------------------------
 | @author: Kang
-| @webcourse: http://foostart.com
+| @webhelpdesk: http://foostart.com
 | @date: 28/12/2017
 |
 */
@@ -15,13 +15,13 @@ use Illuminate\Http\Request;
 use URL, Route, Redirect;
 use Illuminate\Support\Facades\App;
 
-use Foostart\Course\Controllers\Admin\BaseCourseAdminController;
-use Foostart\Course\Models\Course;
+use Foostart\Helpdesk\Controllers\Admin\BaseHelpdeskAdminController;
+use Foostart\Helpdesk\Models\Helpdesk;
 use Foostart\Category\Models\Category;
-use Foostart\Course\Validators\CourseValidator;
+use Foostart\Helpdesk\Validators\HelpdeskValidator;
 use Illuminate\Support\Facades\DB;
 
-class CourseAdminController extends FooController {
+class HelpdeskAdminController extends FooController {
 
     public $obj_item = NULL;
     public $obj_category = NULL;
@@ -32,22 +32,22 @@ class CourseAdminController extends FooController {
 
         parent::__construct();
         // models
-        $this->obj_item = new Course(array('perPage' => 10));
+        $this->obj_item = new Helpdesk(array('perPage' => 10));
         $this->obj_category = new Category();
 
         // validators
-        $this->obj_validator = new CourseValidator();
+        $this->obj_validator = new HelpdeskValidator();
         //$this->obj_validator_sample = new SampleValidator();
         // set language files
-        $this->plang_admin = 'course-admin';
-        $this->plang_front = 'course-front';
+        $this->plang_admin = 'helpdesk-admin';
+        $this->plang_front = 'helpdesk-front';
 
         // package name
-        $this->package_name = 'package-course';
-        $this->package_base_name = 'course';
+        $this->package_name = 'package-helpdesk';
+        $this->package_base_name = 'helpdesk';
 
         // root routers
-        $this->root_router = 'course';
+        $this->root_router = 'helpdesk';
 
         // page views
         $this->page_views = [
@@ -64,7 +64,7 @@ class CourseAdminController extends FooController {
         $this->data_view['status'] = $this->obj_item->getPluckStatus();
 
         // //set category
-        $this->category_ref_name = 'admin/course';
+        $this->category_ref_name = 'admin/helpdesk';
     }
 
     /**
@@ -76,11 +76,11 @@ class CourseAdminController extends FooController {
 
         $params = $request->all();
 
-        $course = $this->obj_item->selectItems($params);
+        $helpdesk = $this->obj_item->selectItems($params);
 
         // display view
         $this->data_view = array_merge($this->data_view, array(
-            'course' => $course,
+            'helpdesk' => $helpdesk,
             'request' => $request,
             'params' => $params,
             'config_status' => $this->obj_item->config_status
@@ -302,7 +302,7 @@ class CourseAdminController extends FooController {
         if ($request->isMethod('post') && $is_valid_request) {
 
             //create backup of current config
-            file_put_contents($config_bakup.'/package-course-'.date('YmdHis',time()).'.php', $content);
+            file_put_contents($config_bakup.'/package-helpdesk-'.date('YmdHis',time()).'.php', $content);
 
             //update new config
             $content = $request->get('content');
@@ -330,13 +330,13 @@ class CourseAdminController extends FooController {
     public function lang(Request $request) {
         $is_valid_request = $this->isValidRequest($request);
         // display view
-        $langs = config('package-course.langs');
+        $langs = config('package-helpdesk.langs');
         $lang_paths = [];
-        $package_path = realpath(base_path('vendor/foostart/package-course'));
+        $package_path = realpath(base_path('vendor/foostart/package-helpdesk'));
 
         if (!empty($langs) && is_array($langs)) {
             foreach ($langs as $key => $value) {
-                $lang_paths[$key] = realpath(base_path('resources/lang/'.$key.'/course-admin.php'));
+                $lang_paths[$key] = realpath(base_path('resources/lang/'.$key.'/helpdesk-admin.php'));
 
                 $key_backup = $package_path.'/storage/backup/lang/'.$key;
 
@@ -374,7 +374,7 @@ class CourseAdminController extends FooController {
                 $content = file_get_contents($value);
 
                 //format file name crawler-admin-YmdHis.php
-                file_put_contents($lang_bakup.'/'.$key.'/course-admin-'.date('YmdHis',time()).'.php', $content);
+                file_put_contents($lang_bakup.'/'.$key.'/helpdesk-admin-'.date('YmdHis',time()).'.php', $content);
             }
 
 
@@ -423,7 +423,7 @@ class CourseAdminController extends FooController {
             $item = $this->obj_item->selectItem($params, FALSE);
 
             if (empty($item)) {
-                return Redirect::route($this->root_router.'.course')
+                return Redirect::route($this->root_router.'.helpdesk')
                                 ->withMessage(trans($this->plang_admin.'.actions.edit-error'));
             }
 

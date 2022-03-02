@@ -1,16 +1,16 @@
 <div class="panel panel-info">
     <div class="panel-heading">
         <h3 class="panel-title bariol-thin"><i class="fa fa-search"></i>
-            <?php echo trans($plang_admin.'.labels.title-search-course') ?>
+            <?php echo trans($plang_admin.'.labels.title-search-helpdesk') ?>
         </h3>
     </div>
     <div class="panel-body">
 
-        {!! Form::open(['route' => 'course','method' => 'get']) !!}
+        {!! Form::open(['route' => 'helpdesk','method' => 'get']) !!}
 
             <!--BUTTONS-->
             <div class="form-group">
-                <a href="{!! URL::route('course', ['context' => @$params['context']]) !!}" class="btn btn-default search-reset">
+                <a href="{!! URL::route('helpdesk', ['context' => @$params['context']]) !!}" class="btn btn-default search-reset">
                     {!! trans($plang_admin.'.buttons.reset') !!}
                 </a>
                 {!! Form::submit(trans($plang_admin.'.buttons.search').'', ["class" => "btn btn-info", 'id' => 'search-submit']) !!}

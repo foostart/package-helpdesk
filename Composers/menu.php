@@ -11,18 +11,18 @@ use Foostart\Category\Helpers\SortTable;
 |   $sidebar_items
 |   $sorting
 |   $order_by
-|   $plang_admin = 'course-admin'
-|   $plang_front = 'course-front'
+|   $plang_admin = 'helpdesk-admin'
+|   $plang_front = 'helpdesk-front'
 */
 View::composer([
-                // Course
-                'package-course::admin.course-edit',
-                'package-course::admin.course-form',
-                'package-course::admin.course-items',
-                'package-course::admin.course-item',
-                'package-course::admin.course-search',
-                'package-course::admin.course-config',
-                'package-course::admin.course-lang',
+                // Helpdesk
+                'package-helpdesk::admin.helpdesk-edit',
+                'package-helpdesk::admin.helpdesk-form',
+                'package-helpdesk::admin.helpdesk-items',
+                'package-helpdesk::admin.helpdesk-item',
+                'package-helpdesk::admin.helpdesk-search',
+                'package-helpdesk::admin.helpdesk-config',
+                'package-helpdesk::admin.helpdesk-lang',
 
     ], function ($view) {
 
@@ -33,34 +33,34 @@ View::composer([
          * $plang-admin
          * $plang-front
          */
-        $plang_admin = 'course-admin';
-        $plang_front = 'course-front';
+        $plang_admin = 'helpdesk-admin';
+        $plang_front = 'helpdesk-front';
 
         $fooCategory = new FooCategory();
-        $key = $fooCategory->getContextKeyByRef('admin/course');
+        $key = $fooCategory->getContextKeyByRef('admin/helpdesk');
 
         /**
          * $sidebar_items
          */
         $sidebar_items = [
-            trans('course-admin.sidebar.add') => [
-                'url' => URL::route('course.edit', []),
+            trans('helpdesk-admin.sidebar.add') => [
+                'url' => URL::route('helpdesk.edit', []),
                 'icon' => '<i class="fa fa-pencil-square-o" aria-hidden="true"></i>'
             ],
-            trans('course-admin.sidebar.list_companies') => [
-                "url" => URL::route('course', []),
+            trans('helpdesk-admin.sidebar.list_companies') => [
+                "url" => URL::route('helpdesk', []),
                 'icon' => '<i class="fa fa-list-ul" aria-hidden="true"></i>'
             ],
             trans('pexcel-admin.sidebar.category') => [
                 'url' => URL::route('categories.list', ['_key=' . $key]),
                 'icon' => '<i class="fa fa-sitemap" aria-hidden="true"></i>'
             ],
-            trans('course-admin.sidebar.config') => [
-                "url" => URL::route('course.config', []),
+            trans('helpdesk-admin.sidebar.config') => [
+                "url" => URL::route('helpdesk.config', []),
                 'icon' => '<i class="fa fa-braille" aria-hidden="true"></i>'
             ],
-            trans('course-admin.sidebar.lang') => [
-                "url" => URL::route('course.lang', []),
+            trans('helpdesk-admin.sidebar.lang') => [
+                "url" => URL::route('helpdesk.lang', []),
                 'icon' => '<i class="fa fa-language" aria-hidden="true"></i>'
             ],
         ];
@@ -71,8 +71,8 @@ View::composer([
          */
         $orders = [
             '' => trans($plang_admin.'.form.no-selected'),
-            'id' => trans($plang_admin.'.fields.course_id'),
-            'course_name' => trans($plang_admin.'.fields.course_name'),
+            'id' => trans($plang_admin.'.fields.helpdesk_id'),
+            'helpdesk_name' => trans($plang_admin.'.fields.helpdesk_name'),
             'updated_at' => trans($plang_admin.'.fields.updated_at'),
             'status' => trans($plang_admin.'.fields.status'),
         ];

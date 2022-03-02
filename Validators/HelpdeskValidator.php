@@ -1,13 +1,13 @@
-<?php namespace Foostart\Course\Validators;
+<?php namespace Foostart\Helpdesk\Validators;
 
 use Foostart\Category\Library\Validators\FooValidator;
 use Event;
 use \LaravelAcl\Library\Validators\AbstractValidator;
-use Foostart\Course\Models\Course;
+use Foostart\Helpdesk\Models\Helpdesk;
 
 use Illuminate\Support\MessageBag as MessageBag;
 
-class CourseValidator extends FooValidator
+class HelpdeskValidator extends FooValidator
 {
 
     protected $obj_crawler;
@@ -16,14 +16,14 @@ class CourseValidator extends FooValidator
     {
         // add rules
         self::$rules = [
-            'course_name' => ["required"],
+            'helpdesk_name' => ["required"],
         ];
 
         // set configs
         self::$configs = $this->loadConfigs();
 
         // model
-        $this->obj_crawler = new Course();
+        $this->obj_crawler = new Helpdesk();
 
         // language
         $this->lang_front = 'crawler-front';
@@ -33,7 +33,7 @@ class CourseValidator extends FooValidator
         Event::listen('validating', function($input)
         {
             self::$messages = [
-                'course_name.required'          => trans($this->lang_admin.'.errors.required', ['attribute' => trans($this->lang_admin.'.fields.name')]),
+                'helpdesk_name.required'          => trans($this->lang_admin.'.errors.required', ['attribute' => trans($this->lang_admin.'.fields.name')]),
                 ];
         });
 
@@ -55,14 +55,14 @@ class CourseValidator extends FooValidator
 
         $params = [
             'name' => [
-                'key' => 'course_name',
+                'key' => 'helpdesk_name',
                 'label' => trans($this->lang_admin.'.fields.name'),
-                'min' => $_ln['course_name']['min'],
-                'max' => $_ln['course_name']['max'],
+                'min' => $_ln['helpdesk_name']['min'],
+                'max' => $_ln['helpdesk_name']['max'],
             ],
         ];
 
-        $flag = $this->isValidLength($input['course_name'], $params['name']) ? $flag : FALSE;
+        $flag = $this->isValidLength($input['helpdesk_name'], $params['name']) ? $flag : FALSE;
 
         return $flag;
     }
@@ -74,7 +74,7 @@ class CourseValidator extends FooValidator
      */
     public function loadConfigs(){
 
-        $configs = config('package-course');
+        $configs = config('package-helpdesk');
         return $configs;
     }
 
@@ -86,8 +86,8 @@ class CourseValidator extends FooValidator
     public function userValidate($input) {
         //set rules
         self::$rules = [
-            'course_name' => ["required"],
-            'course_url' => ["required"],
+            'helpdesk_name' => ["required"],
+            'helpdesk_url' => ["required"],
         ];
 
         //validate

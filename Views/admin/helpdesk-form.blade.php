@@ -1,18 +1,18 @@
 <!------------------------------------------------------------------------------
-| List of elements in course form
+| List of elements in helpdesk form
 |------------------------------------------------------------------------------->
 
-{!! Form::open(['route'=>['course.post', 'id' => @$item->id],  'files'=>true, 'method' => 'post'])  !!}
+{!! Form::open(['route'=>['helpdesk.post', 'id' => @$item->id],  'files'=>true, 'method' => 'post'])  !!}
 
     <!--BUTTONS-->
     <div class='btn-form'>
         @if(isset($item) && $item->deleted_at)
-            <a href="{!! URL::route('course.restore',['id' => $item->id, '_token' => csrf_token()]) !!}"
+            <a href="{!! URL::route('helpdesk.restore',['id' => $item->id, '_token' => csrf_token()]) !!}"
                class="btn btn-success pull-right margin-left-5 restore">
                 {!! trans($plang_admin.'.buttons.restore') !!}
             </a>
         @elseif (isset($item))
-            <a href="{!! URL::route('course.delete',['id' => @$item->id, '_token' => csrf_token()]) !!}"
+            <a href="{!! URL::route('helpdesk.delete',['id' => @$item->id, '_token' => csrf_token()]) !!}"
                class="btn btn-warning pull-right margin-left-5 delete">
                 {!! trans($plang_admin.'.buttons.delete') !!}
             </a>
@@ -48,21 +48,21 @@
 
             <!--NAME-->
             @include('package-category::admin.partials.input_text', [
-                'name' => 'course_name',
-                'label' => trans($plang_admin.'.labels.course_name'),
-                'value' => @$item->course_name,
-                'description' => trans($plang_admin.'.descriptions.course_name'),
+                'name' => 'helpdesk_name',
+                'label' => trans($plang_admin.'.labels.helpdesk_name'),
+                'value' => @$item->helpdesk_name,
+                'description' => trans($plang_admin.'.descriptions.helpdesk_name'),
                 'errors' => $errors,
             ])
             <!--/NAME-->
 
             <!--SITE SLUG-->
             @include('package-category::admin.partials.input_slug', [
-                'name' => 'course_slug',
-                'id' => 'course_slug',
-                'ref' => 'course_name',
+                'name' => 'helpdesk_slug',
+                'id' => 'helpdesk_slug',
+                'ref' => 'helpdesk_name',
                 'label' => trans($plang_admin.'.labels.slug'),
-                'value' => @$item->course_slug,
+                'value' => @$item->helpdesk_slug,
                 'description' => trans($plang_admin.'.descriptions.slug'),
                 'errors' => $errors,
             ])
@@ -70,20 +70,20 @@
 
             <!--WEBSITE-->
             @include('package-category::admin.partials.input_text', [
-                'name' => 'course_website',
-                'label' => trans($plang_admin.'.labels.course_website'),
-                'value' => @$item->course_website,
-                'description' => trans($plang_admin.'.descriptions.course_website'),
+                'name' => 'helpdesk_website',
+                'label' => trans($plang_admin.'.labels.helpdesk_website'),
+                'value' => @$item->helpdesk_website,
+                'description' => trans($plang_admin.'.descriptions.helpdesk_website'),
                 'errors' => $errors,
             ])
             <!-- /WEBSITE-->
 
             <!--ADDRESS-->
             @include('package-category::admin.partials.input_text', [
-                'name' => 'course_address',
-                'label' => trans($plang_admin.'.labels.course_address'),
-                'value' => @$item->course_address,
-                'description' => trans($plang_admin.'.descriptions.course_address'),
+                'name' => 'helpdesk_address',
+                'label' => trans($plang_admin.'.labels.helpdesk_address'),
+                'value' => @$item->helpdesk_address,
+                'description' => trans($plang_admin.'.descriptions.helpdesk_address'),
                 'errors' => $errors,
             ])
             <!-- /ADDRESS-->
@@ -116,10 +116,10 @@
 
              <!--DESCRIPTION-->
             @include('package-category::admin.partials.textarea', [
-                'name' => 'course_description',
-                'label' => trans($plang_admin.'.labels.course_description'),
-                'value' => @$item->course_description,
-                'description' => trans($plang_admin.'.descriptions.course_description'),
+                'name' => 'helpdesk_description',
+                'label' => trans($plang_admin.'.labels.helpdesk_description'),
+                'value' => @$item->helpdesk_description,
+                'description' => trans($plang_admin.'.descriptions.helpdesk_description'),
                 'rows' => 25,
                 'tinymce' => true,
                 'errors' => $errors,
@@ -131,10 +131,10 @@
         <div id="menu_3" class="tab-pane fade">
             <!--SITE IMAGE-->
             @include('package-category::admin.partials.input_image', [
-                'name' => 'course_image',
-                'label' => trans($plang_admin.'.labels.course_image'),
-                'value' => @$item->course_image,
-                'description' => trans($plang_admin.'.descriptions.course_image'),
+                'name' => 'helpdesk_image',
+                'label' => trans($plang_admin.'.labels.helpdesk_image'),
+                'value' => @$item->helpdesk_image,
+                'description' => trans($plang_admin.'.descriptions.helpdesk_image'),
                 'errors' => $errors,
                 'lfm_config' => TRUE
             ])
@@ -153,5 +153,5 @@
 
 {!! Form::close() !!}
 <!------------------------------------------------------------------------------
-| End list of elements in course form
+| End list of elements in helpdesk form
 |------------------------------------------------------------------------------>

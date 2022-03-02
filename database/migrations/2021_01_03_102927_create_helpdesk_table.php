@@ -4,11 +4,11 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Foostart\Category\Helpers\FoostartMigration;
 
-class CreateCourseTable extends FoostartMigration
+class CreateHelpdeskTable extends FoostartMigration
 {
     public function __construct() {
-        $this->table = 'course';
-        $this->prefix_column = 'course_';
+        $this->table = 'helpdesk';
+        $this->prefix_column = 'helpdesk_';
     }
     /**
      * Run the migrations.
@@ -26,13 +26,13 @@ class CreateCourseTable extends FoostartMigration
             $table->integer('category_id')->comment('Category ID');
 
             // Other attributes
-            $table->string($this->prefix_column . 'name', 255)->comment('Course name');
-            $table->string($this->prefix_column . 'slug', 255)->comment('Course slug');
-            $table->string($this->prefix_column . 'start_date', 255)->nullable()->comment('Course start date');
-            $table->string($this->prefix_column . 'end_date', 255)->nullable()->comment('Course end date');
+            $table->string($this->prefix_column . 'name', 255)->comment('Helpdesk name');
+            $table->string($this->prefix_column . 'slug', 255)->comment('Helpdesk slug');
+            $table->string($this->prefix_column . 'start_date', 255)->nullable()->comment('Helpdesk start date');
+            $table->string($this->prefix_column . 'end_date', 255)->nullable()->comment('Helpdesk end date');
 
-            $table->string($this->prefix_column . 'image', 255)->nullable()->comment('Course image');
-            $table->text($this->prefix_column . 'description')->nullable()->comment('Course description');
+            $table->string($this->prefix_column . 'image', 255)->nullable()->comment('Helpdesk image');
+            $table->text($this->prefix_column . 'description')->nullable()->comment('Helpdesk description');
 
             //Set common columns
             $this->setCommonColumns($table);

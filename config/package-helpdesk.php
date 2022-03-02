@@ -3,7 +3,7 @@ return [
 
     //Number of worlds
     'length' => [
-        'course_name' => [
+        'helpdesk_name' => [
             'min' => 2,
             'max' => 255,
         ],
@@ -19,7 +19,7 @@ return [
     |
     */
     'env' => 0,
-    'load_from' => 'package-course::',
+    'load_from' => 'package-helpdesk::',
 
     /*
     |-----------------------------------------------------------------------

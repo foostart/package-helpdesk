@@ -1,29 +1,28 @@
 @extends('package-acl::admin.layouts.base-2cols')
 
 @section('title')
-    {{ trans($plang_admin.'.pages.title-config') }}
+    {{ trans($plang_admin.'.pages.title-helpdesk') }}
 @stop
 
 @section('content')
 
     <div class="row">
-        <div class="col-md-12">
 
             <!--LIST OF ITEMS-->
-            <div class="col-md-8">
+            <div class="col-md-9">
 
                 <div class="panel panel-info">
 
                     <!--HEADING-->
                     <div class="panel-heading">
-                        <h3 class="panel-title bariol-thin"><i class="fa fa-braille" aria-hidden="true"></i>
-                            {!! trans($plang_admin.'.pages.title-config') !!}
+                        <h3 class="panel-title bariol-thin"><i class="fa fa-list-ul" aria-hidden="true"></i>
+                            {!! $request->all() ? trans($plang_admin.'.pages.title-list-search-helpdesk') : trans($plang_admin.'.pages.title-helpdesk') !!}
                         </h3>
                     </div>
 
                     <!--DESCRIPTION-->
                     <div class='panel-info panel-description'>
-                        {!! trans($plang_admin.'.descriptions.config') !!}</h4>
+                        {!! trans($plang_admin.'.descriptions.list') !!}</h4>
                     </div>
                     <!--/DESCRIPTION-->
 
@@ -46,20 +45,13 @@
 
                     <!--BODY-->
                     <div class="panel-body">
-                        {!! Form::open(['route'=>['course.config'], 'method' => 'post'])  !!}
+                        {!! Form::open(['route'=>['helpdesk.delete', 'id' => @$item->id], 'method' => 'get'])  !!}
 
-                            <div class='btn-form'>
+                            @include('package-helpdesk::admin.helpdesk-item')
 
-                                <!-- SAVE BUTTON -->
-                                {!! Form::submit(trans($plang_admin.'.buttons.save'), array("class"=>"btn btn-info pull-right ")) !!}
-                                <!-- /SAVE BUTTON -->
+                            {!! csrf_field(); !!}
 
-                            </div>
-
-                            {!! Form::label('content', trans($plang_admin.'.labels.config')) !!}
-                            {!! Form::textarea('content', $content, ['class' => 'form-control textarea-margin', 'size' => '30x50']) !!}
-
-                            {!! Form::close() !!}
+                        {!! Form::close() !!}
                     </div>
                     <!--/BODY-->
 
@@ -68,11 +60,20 @@
             <!--/LIST OF ITEMS-->
 
             <!--SEARCH-->
-            <div class="col-md-4">
-                @include('package-course::admin.course-config-backup')
+            <div class="col-md-3">
+                @include('package-helpdesk::admin.helpdesk-search')
             </div>
             <!--/SEARCH-->
-
-        </div>
     </div>
+@stop
+
+
+@section('footer_scripts')
+    <!-- DELETE CONFIRM -->
+    <script>
+        $(".delete").click(function () {
+            return confirm("{!! trans($plang_admin.'.confirms.delete') !!}");
+        });
+    </script>
+    <!-- /END DELETE CONFIRM -->
 @stop

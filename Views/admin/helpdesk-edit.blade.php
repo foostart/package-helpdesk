@@ -1,7 +1,7 @@
 <!--
 | @TITLE
-| Update existing course
-| Add new course
+| Update existing helpdesk
+| Add new helpdesk
 |
 |-------------------------------------------------------------------------------
 | @REQUIRED
@@ -40,7 +40,7 @@
 
                 <!--DESCRIPTION-->
                 <div class='panel-description'>
-                    {!! trans($plang_admin.'.descriptions.course_form') !!}</h4>
+                    {!! trans($plang_admin.'.descriptions.helpdesk_form') !!}</h4>
                 </div>
 
                 <!-- ERRORS NAME  -->
@@ -63,7 +63,7 @@
                     <div class="row">
                         <div class="col-md-12 col-xs-12">
 
-                            @include('package-course::admin.course-form')
+                            @include('package-helpdesk::admin.helpdesk-form')
 
                         </div>
                     </div>
@@ -72,7 +72,7 @@
         </div>
 
         <div class='col-md-3'>
-            @include('package-course::admin.course-search')
+            @include('package-helpdesk::admin.helpdesk-search')
         </div>
 
 </div>
